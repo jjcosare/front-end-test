@@ -1,7 +1,9 @@
+
+var app = angular.module('qudini.QueueApp', []);
+
 (function () {
 
-    angular.module('qudini.QueueApp', [])
-        .controller('QueueCtrl', QueueCtrl)
+    app.controller('QueueCtrl', QueueCtrl);
 
     /**
      * Bonus points - manipulating the without waiting for the
@@ -24,7 +26,7 @@
 
         $scope.onCustomerServed = function(){
             _getCustomers();
-            _getServedCustomers()
+            _getServedCustomers();
         }
 
         function _getServedCustomers(){
@@ -39,7 +41,6 @@
             })
         }
     }
-
 
 })()
 

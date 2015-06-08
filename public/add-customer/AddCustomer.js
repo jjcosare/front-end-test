@@ -1,7 +1,6 @@
 (function () {
-    angular.module('qudini.QueueApp')
-        .directive('addCustomer', AddCustomer)
 
+    app.directive('addCustomer', AddCustomer);
 
     function AddCustomer($http){
         return {
@@ -18,8 +17,19 @@
                     {name: 'Cryptography advice'}
                 ];
 
-                scope.addCustomer = function(){
-
+                scope.add = function(){
+                    if(scope.customer.product){
+                        $http({
+                            method: 'POST',
+                            url: '/api/customer/add',
+                            data: scope.customer
+                        }).then(function(res){
+                            scope.onAdded()();
+                            console.log(res.data);
+                        });
+                    } else{
+                        alert("Please choose a product");
+                    }
                 }
             }
         }

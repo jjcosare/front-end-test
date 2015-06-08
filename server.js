@@ -2,8 +2,8 @@ var http = require('http');
 var uuid =  require('node-uuid');
 var serveStatic = require('node-static');
 var fileServer = new serveStatic.Server('./public');
-var express = require('express')
-var bodyParser = require('body-parser')
+var express = require('express');
+var bodyParser = require('body-parser');
 
 
 var customers = [
@@ -20,6 +20,7 @@ function serveCustomer(id){
     customers = customers.filter(function(customer){
         if(customer.id == id){
             customer.status = 'served';
+            customer.servedTime = new Date().toString();
             servedCustomers.push(customer);
             return false;
         }else{
@@ -30,6 +31,7 @@ function serveCustomer(id){
 
 function addCustomer(customer){
     customer.id = uuid.v4();
+    customer.joinedTime = new Date().toString();
     customers.push(customer);
 }
 
@@ -56,7 +58,7 @@ app.post('/api/customer/add', function(req,res){
     res.end('Customer was added!');
 });
 app.post('/api/customer/serve', function(req,res){
-    serveCustomer(req.body.id);
+    serveCustomer(req.query.id);
     res.end('Customer was served!');
 });
 app.delete('/api/customer/remove', function(req,res){
