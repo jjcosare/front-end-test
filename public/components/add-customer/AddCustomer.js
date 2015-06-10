@@ -8,7 +8,7 @@
             scope:{
                 onAdded: '&'
             },
-            templateUrl:'/add-customer/add-customer.html',
+            templateUrl:'/components/add-customer/add-customer.html',
             link: function(scope){
 
                 scope.products = [
@@ -17,8 +17,20 @@
                     {name: 'Cryptography advice'}
                 ];
 
+                scope.customer = {};
+                scope.customer.name = null;
+                scope.customer.product = null;
+
                 scope.add = function(){
-                    if(scope.customer.product){
+                    var error = "";
+                    if(!scope.customer.name){
+                        error += "\r\n Please write a name";
+                    }
+                    if(!scope.customer.product){
+                        error += "\r\n Please choose a product";
+                    }
+
+                    if(!error){
                         $http({
                             method: 'POST',
                             url: '/api/customer/add',
@@ -28,7 +40,7 @@
                             console.log(res.data);
                         });
                     } else{
-                        alert("Please choose a product");
+                        console.log(error);
                     }
                 }
             }
@@ -36,4 +48,3 @@
     }
 
 })()
-

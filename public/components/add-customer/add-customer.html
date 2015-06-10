@@ -1,0 +1,17 @@
+<div class="AddCustomer">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input class="form-control" name="customerName" required type="text" placeholder="Name" ng-model="customer.name"/>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="productList" required ng-options="product.name for product in products" ng-model="customer.product" placeholder="Product">
+                        <option value="" disabled>Choose Product</option>
+                    </select>
+                </div>
+                <button ng-click="add()" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</div>

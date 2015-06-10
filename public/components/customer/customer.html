@@ -1,0 +1,36 @@
+<div class="Customer">
+    <div ng-if="customer.status != null">
+        <div class="row">
+            <div class="col-md-4">
+                <span>{{ customer.name }}</span>
+            </div>
+            <div class="col-md-4">
+                <span>{{ customer.product.name }}</span>
+            </div>
+            <div class="col-md-4">
+                <span>{{ customer.queuedTime }}</span>
+            </div>
+        </div>
+    </div>
+    <div ng-if="customer.status == null">
+        <div class="row">
+            <div class="col-md-3">
+                <span>{{ customer.name }}</span>
+            </div>
+            <div class="col-md-3">
+                <span>{{ customer.product.name }}</span>
+            </div>
+            <div class="col-md-3">
+                <span>{{ customer.queuedTime }}</span>
+            </div>
+            <div class="col-md-3">
+                <span>
+                    <button class="btn btn-danger btn-xs" ng-click="remove()">Remove</button>
+                    <button class="btn btn-success btn-xs" ng-click="serve()">Serve</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+

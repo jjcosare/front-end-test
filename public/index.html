@@ -3,26 +3,65 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Queue App</title>
-    <script src="/bower_components/angularjs/angular.min.js"></script>
-    <script src="/QueueApp.js"></script>
-    <script src="/customer/Customer.js"></script>
-    <script src="/add-customer/AddCustomer.js"></script>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/styles/app.css" rel="stylesheet"></link>
+    <script src="/scripts/angular.min.js"></script>
+    <script src="/scripts/QueueApp.js"></script>
+    <script src="/components/customer/Customer.js"></script>
+    <script src="/components/add-customer/AddCustomer.js"></script>
 </head>
 <body class="Queue" ng-app="qudini.QueueApp" ng-controller="QueueCtrl">
-
-    <h2>Add Customer</h2>
-    <add-customer on-added="onCustomerAdded"></add-customer>
-    <h2>Queueing Customers</h2>
-    <ul class="Queue-customer-list">
-        <li ng-repeat="customerData in customers">
-            <customer customer="customerData" on-served="onCustomerServed" on-removed="onCustomerRemoved"></customer>
-        </li>
-    </ul>
-    <h2>Served customers</h2>
-    <ul class="Queue-customer-served-list">
-        <li ng-repeat="customerData in customersServed">
-            <customer customer="customerData" on-served="onCustomerServed" on-removed="onCustomerRemoved"></customer>
-        </li>
-    </ul>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Add Customer</h2>
+            <add-customer on-added="onCustomerAdded"></add-customer>
+        </div>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Queueing Customers</h2>
+            <div ng-repeat="customerData in customers">
+                <div ng-if="$first" class="row">
+                    <div class="col-md-3">
+                        <h5><strong>Name</strong></h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5><strong>Product Name</strong></h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5><strong>Queued Time</strong></h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 ng-hide="customerData.status"><strong>Actions</strong></h5>
+                    </div>
+                </div>
+                <hr />
+                <customer customer="customerData" on-served="onCustomerServed" on-removed="onCustomerRemoved"></customer>
+                <hr ng-if="$last" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>Served customers</h2>
+            <div ng-repeat="customerData in customersServed">
+                <div ng-if="$first" class="row">
+                    <div class="col-md-4">
+                        <h5><strong>Name</strong></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5><strong>Product Name</strong></h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5><strong>Served Time</strong></h5>
+                    </div>
+                </div>
+                <hr />
+                <customer customer="customerData" on-served="onCustomerServed" on-removed="onCustomerRemoved"></customer>
+                <hr ng-if="$last" />
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

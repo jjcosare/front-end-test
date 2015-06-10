@@ -1,4 +1,3 @@
-
 var app = angular.module('qudini.QueueApp', []);
 
 (function () {
